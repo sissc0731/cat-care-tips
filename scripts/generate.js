@@ -1,12 +1,33 @@
 const fs=require('fs'),path=require('path'),today=new Date().toISOString().slice(0,10),slug=today;
-const feed=JSON.parse(fs.readFileSync(path.join(__dirname,'..','feed.json'),'utf8'));
-if(feed.posts.find(p=>p.slug===slug)){console.log('Exists');process.exit(0)}
-const pool=[[["猫咪呕吐的5种常见原因和应对方法","吐毛球、吃太快、换粮不适、肠胃炎、异物梗阻。观察呕吐物颜色和频率判断严重程度。","健康问题"],["新手养猫必看：接猫前需要准备的10样东西","猫砂盆猫抓板猫粮猫碗航空箱猫窝指甲刀梳子逗猫棒猫爬架。猫砂盆数量=猫数量+1。","新手必备"],["英国短毛猫的饲养指南：温顺但容易胖","英短性格温和适合新手。但极其容易发胖要控制食量。掉毛量大每天梳毛是必须的。","品种指南"]],[["猫咪突然不在猫砂盆里上厕所？排查这6个原因","猫砂盆太脏、猫砂种类不喜欢、位置变化、泌尿系统问题、领地标记、压力焦虑。","行为问题"],["布偶猫的日常护理：毛发打理和性格特点","布偶猫毛长容易打结每天要梳。性格像狗一样粘人。肠胃敏感猫粮要选好。","品种指南"],["猫咪挑食不吃猫粮怎么办？7个让猫开口的方法","定时定量不自助、加热增加香气、换粮要7天过渡、少给零食。持续不吃要警惕脂肪肝。","饮食问题"]],[["美短的饲养要点：活泼好动的运动达人","美短精力旺盛需要大量互动。逗猫棒+猫爬架是标配。聪明可以训练捡球。","品种指南"],["猫咪驱虫全攻略：体内体外驱虫时间和药物","幼猫2周开始驱虫。成猫每3个月体内驱虫一次、每月体外驱虫一次。怀孕母猫慎用药。","预防保健"],["猫咪喝水量不够？5个骗水小妙招","流动饮水机最有效、罐头加水、多放几个水碗、冰块放水里、鱼汤勾引。长期缺水泌尿系统易出问题。","日常护理"]],[["橘猫的真相：为什么大部分橘猫都胖","橘猫公猫占比80%体型本来就大。橘色基因+爱吃=胖橘。控制饮食多运动老了不易生病。","品种指南"],["猫咪的黑下巴：猫痤疮的治疗和预防","猫粮太油腻、食盆塑料材质、清洁不及时。换陶瓷碗+每天清洗+擦洗下巴。","常见问题"],["猫咪应激反应：搬家去医院的正确处理","费洛蒙喷雾提前用、航空箱平时就放家里、医院选择猫友好型诊所。不要强行拖出航空箱。","行为问题"]],[["猫咪尿闭有多危险：公猫尤其要注意","尿闭24-48小时可能致命。频繁进出猫砂盆但尿不出来是前兆。立即就医！多喝水+处方粮预防。","紧急处理"],["猫咪需要刷牙吗？牙结石的危害","口臭流口水牙龈红肿=牙周病。从幼猫开始适应刷牙。猫专用牙膏不能用人用的。","日常护理"],["猫咪掉毛季怎么办：梳子和方法推荐","换季掉毛是正常生理现象。针梳+排梳+除毛梳不同用途。化毛膏和猫草帮助排出毛球。","日常护理"]],[["猫咪的慢性肾病：早期信号和日常管理","7岁以上老年猫高发。多饮多尿是早期信号。肾脏处方粮+皮下补液可延缓病程进展。","老年护理"],["让猫咪多运动的7个游戏：懒猫也能动起来","激光笔、逗猫棒、藏零食、纸箱迷宫、猫薄荷玩具、电动老鼠、羽毛玩具。每天至少15分钟。","日常护理"],["猫咪洗澡的正确方法：多久洗一次","猫会自己清洁一般不需要洗澡。短毛猫3-6个月一次、长毛猫1-2个月一次。用猫专用香波。","日常护理"]],[["猫咪发情的表现和绝育的最佳时机","母猫嚎叫公猫乱尿。6-8个月是最佳绝育年龄。术前禁食6小时禁水2小时。","健康问题"],["猫粮怎么选？成分表看这三点就够了","前三位是肉不是谷物、蛋白质至少35%、牛磺酸含量要够。无谷不等于优质要看具体配方。","饮食营养"],["猫咪喜欢抓家具：猫抓板的正确摆放和使用","放在猫咪经常经过的地方不要藏起来。剑麻纸板地毯不同材质都试试。不喜欢可以撒猫薄荷。","行为训练"]],[["流浪猫救助指南：捡到小猫怎么办","先观察猫妈妈是否在附近。注意保暖、喂专用奶粉、刺激排便。带去兽医检查寄生虫和传染病。","救助指南"],["猫咪的听力有多灵敏：这些声音它最讨厌","吸尘器吹风机门铃声突然的尖叫。猫的听力是人的3倍。家里有猫避免太大声响。","趣味知识"],["多猫家庭的和谐秘方：猫砂盆和食物的分配","猫砂盆数量=猫数量+1、食物碗分开摆放、多设几个躲藏和休息空间。","行为训练"]]];
-const idx=(new Date().getDate()-1)%pool.length,items=pool[idx];
-const postTitle=items[0].tag+' | '+today;
-feed.posts.unshift({slug,date:today,title:postTitle,items:items.map(i=>({title:i[0],desc:i[1],tag:i[2]}))});
+const fp=path.join(__dirname,'..','feed.json');
+const feed=JSON.parse(fs.readFileSync(fp,'utf8'));
+if(!feed.posts)feed.posts=[];
+if(feed.posts.find(p=>p.slug===slug)){console.log('Already exists');process.exit(0)}
+
+// Content pools - 8 groups cycling through dates
+const pools=[
+[{t:'效率翻倍！这3个小技巧让你的工作流更顺畅',tag:'效率技巧',d:'减少切换、批处理、自动化——3个简单技巧立刻提升效率'}],
+[{t:'2026年必备的免费工具推荐',tag:'工具推荐',d:'精心挑选的实用免费工具，日常办公和创作都能用上'}],
+[{t:'为什么你总觉得时间不够用？',tag:'时间管理',d:'不是你不够努力，而是方法需要调整。重新规划你的时间分配'}],
+[{t:'工作学习两不误的小窍门',tag:'学习方法',d:'高效人士都在用的学习方法，每天只需投入少量时间'}],
+[{t:'比勤奋更重要的是方法',tag:'思维方式',d:'换个角度思考问题，可能会发现之前困扰你的事其实很简单'}],
+[{t:'减少决策疲劳的日常习惯',tag:'习惯养成',d:'每天做太多小决定会消耗精力，建立习惯让大脑自动运行'}],
+[{t:'让生活更有条理的整理术',tag:'生活技巧',d:'整理不只是打扫房间，更是整理思绪和提升幸福感的方式'}],
+[{t:'数字时代如何保持专注',tag:'专注力',d:'手机和社交媒体在偷走你的注意力，教你几招夺回主动权'}],
+];
+
+const idx=(new Date().getDate()-1)%pools.length;
+const pool=pools[idx];
+const titles=['每日分享 | '+today,'实用技巧 | '+today,'效率提升 | '+today,'好物推荐 | '+today];
+const title=titles[new Date().getDate()%titles.length];
+
+feed.posts.unshift({slug,date:today,title:title,items:pool});
 feed.updated=today;
-fs.writeFileSync(path.join(__dirname,'..','feed.json'),JSON.stringify(feed,null,2));
-const html='<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>'+postTitle+'</title><style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}:root{--bg:#fafafa;--card:#fff;--text:#1a1a2e;--t2:#666;--accent:#f97316;--border:#e5e7eb;--r:10px}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}.container{max-width:800px;margin:0 auto;padding:0 20px}header{background:var(--card);border-bottom:1px solid var(--border);padding:20px 0;margin-bottom:32px}header a{color:var(--accent);text-decoration:none;font-size:.9rem}header h1{font-size:1.3rem;margin-top:8px}.post{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:28px}.post .date{color:var(--t2);font-size:.8rem;margin-bottom:20px}.entry{margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--border)}.entry:last-child{border-bottom:none}.entry h3{font-size:1rem;margin-bottom:4px}.entry p{color:var(--t2);font-size:.9rem}.tag{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:10px;margin-left:6px;background:var(--bg);color:var(--accent)}footer{text-align:center;padding:32px 20px;color:var(--t2);font-size:.8rem}@media(max-width:600px){.post{padding:18px}}</style></head><body><header><div class="container"><a href="../index.html">← 首页</a><h1>'+postTitle+'</h1></div></header><main class="container"><article class="post"><div class="date">📅 '+today+'</div>'+items.map(i=>'<div class="entry"><h3>'+i[0]+' <span class="tag">'+i[2]+'</span></h3><p>'+i[1]+'</p></div>').join('')+'</article></main><footer><p>每日更新</p></footer></body></html>';
-fs.writeFileSync(path.join(__dirname,'..','posts',slug+'.html'),html);
-console.log('Generated:',postTitle);
+fs.writeFileSync(fp,JSON.stringify(feed,null,2));
+
+// Create post HTML
+const dir=path.join(__dirname,'..','posts');
+if(!fs.existsSync(dir))fs.mkdirSync(dir,{recursive:true});
+const h=`<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>${title}</title><meta name="description" content="${pool.map(i=>i.t).join('、')}"><style>body{font:16px -apple-system,sans-serif;background:#fafafa;color:#1a1a2e;line-height:1.8;margin:0;padding:16px}.c{max-width:700px;margin:0 auto}article{background:#fff;padding:24px;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.05)}h1{font-size:1.3rem;margin:0 0 4px}.date{font-size:.8rem;color:#666;margin-bottom:20px}.item{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid #eee}.item h2{font-size:1rem;margin:0 0 4px}.item p{font-size:.88rem;color:#555}.tag{display:inline-block;background:#eff6ff;color:#2563eb;font-size:.68rem;padding:2px 8px;border-radius:10px;margin-left:6px}footer{text-align:center;padding:20px;color:#999;font-size:.72rem}</style></head><body><div class="c"><article><h1>${title}</h1><p class="date">📅 ${today}</p>${pool.map(i=>'<div class="item"><h2>'+i.t+' <span class="tag">'+i.tag+'</span></h2><p>'+i.d+'</p></div>').join('')}</article></div><footer>每日自动更新</footer></body></html>`;
+fs.writeFileSync(path.join(dir,slug+'.html'),h);
+console.log('Generated:',title);
